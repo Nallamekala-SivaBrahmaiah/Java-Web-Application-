@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://www.m...">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -10,7 +10,6 @@
     <packaging>war</packaging>
 
     <name>mavenproject01 Maven Webapp</name>
-    <url>http://maven.apache.org</url>
 
     <!-- ✅ SonarQube Properties -->
     <properties>
@@ -18,6 +17,20 @@
         <sonar.projectName>mavenproject01</sonar.projectName>
         <sonar.host.url>http://localhost:9000</sonar.host.url>
     </properties>
+
+    <!-- ✅ JFrog Artifactory Deploy Config -->
+    <distributionManagement>
+        <repository>
+            <id>jfrog-repo</id>
+            <name>JFrog Artifactory</name>
+            <url>http://localhost:8081/artifactory/libs-release-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>jfrog-repo</id>
+            <name>JFrog Snapshots</name>
+            <url>http://localhost:8081/artifactory/libs-snapshot-local</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <dependencies>
         <dependency>
@@ -42,7 +55,14 @@
                 </configuration>
             </plugin>
 
-            <!-- ✅ Sonar Maven Plugin -->
+            <!-- Deploy plugin (IMPORTANT) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.1.1</version>
+            </plugin>
+
+            <!-- Sonar Plugin -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
@@ -50,7 +70,6 @@
             </plugin>
 
         </plugins>
-
     </build>
 
 </project>
