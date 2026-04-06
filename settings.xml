@@ -1,0 +1,7 @@
+<servers>
+  <server>
+    <id>jfrog-repo</id>
+    <username>admin</username>
+    <password>password</password>
+  </server>
+</servers>
